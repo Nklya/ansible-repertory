@@ -14,17 +14,13 @@ The mastery of the ensemble is determined by the quantity and quality of plays p
 * `environments/` - root directory for environments
   * `environment_dir/` - directory containing vars and hosts per environment
     * `group_vars/` - variables defined per group
-    * `host_vars/` - variables defined per host
-    * `play_vars/` - variables defined per play in playbooks
-    * `inventory_file` - inventory file with hosts related to the environment
-* `playbooks/` - directory for playbooks, playbook per application
+    * `inventory` - inventory file with hosts related to the environment
+* `playbooks/` - directory for playbooks, playbook per application + site.yml
 * `roles/` - custom roles
 * `ansible.cfg` - config for ansible
 * `molecule.yml` - config for molecule
 * `requirements.txt` - python requirements
 * `requirements.yml` - ansible playbooks' requirements
-* `site.yml` - playbook containing every app in infrastructure
-* `vagrantfile.j2` - custom Vagrantfile template for molecule
 
 # What goes where
 
@@ -32,9 +28,7 @@ The mastery of the ensemble is determined by the quantity and quality of plays p
 * All variables should be defined per environment
 * The precedence order can be seen at http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
 * Try to use only next places to define a variable:
-  * Environment host_vars
   * Environment group_vars
-  * Environment play_vars
 * Avoid setting variable in playbooks
 
 ## Tasks
@@ -52,11 +46,6 @@ The mastery of the ensemble is determined by the quantity and quality of plays p
 * Clone git repo
 ```sh
 git clone git@github.com:express42/ansible-repertory.git
-``` 
-* Install [the latest release of Vagrant][Vagrant]
-* Install Vagrant DigitalOcean provider
-```sh
-vagrant plugin install vagrant-digitalocean
 ```
 * Install prerequisites
 ```sh
@@ -64,14 +53,6 @@ cd ansible-repertory
 ansible-galaxy install -r requirements.yml
 pip install -r requirements.txt
 touch vault.key
-```
-* Create VMs using Digital Ocean
-  * %DOTOKEN% - Digital Ocean token (if you haven't got one you can create it at https://cloud.digitalocean.com/settings/api/tokens)
-  * %SOMENAME% - Name of SSH key at Digital Ocean, it should match your key at https://cloud.digitalocean.com/settings/security 
-```sh
-export DO_TOKEN=%DOTOKEN%
-export SSH_KEY_NAME='%SOMENAME%'
-molecule converge --provider=digital_ocean
 ```
 * Run idempotence and serverspec tests on your infrastructure
 ```sh
@@ -143,6 +124,4 @@ git push
 # Links
 * [Ansible documentation](https://docs.ansible.com/ansible/index.html "Ansible documentation")
 * [Molecule documentation](https://molecule.readthedocs.io/en/master/ "Molecule documentation")
-* [Vagrant documentation](https://www.vagrantup.com/docs/ "Vagrant documentation")
-
-[Vagrant]: https://www.vagrantup.com/downloads.html "Vagrant"
+* [Docker documentation](https://docs.docker.com "Docker documentation")
