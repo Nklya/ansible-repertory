@@ -1,0 +1,3 @@
+localhost
+[molecule]
+ansible-repertory ansible_connection=docker
