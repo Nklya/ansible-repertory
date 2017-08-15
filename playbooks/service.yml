@@ -1,0 +1,7 @@
+---
+- name: Configure prometheus
+  hosts: all
+  become: true
+  roles:
+  - williamyeh.prometheus
+  - ansiblebit.grafana

@@ -2,15 +2,18 @@
 ansible:
   config_file: ./ansible.cfg
   playbook: ./playbooks/site.yml
+  inventory_file: ./environments/molecule/inventory
 dependency:
   name: galaxy
+  requirements_file: ./requirements.yml
 driver:
   name: docker
 docker:
   containers:
     - name: ansible-repertory
-      image: ubuntu
+      image: solita/ubuntu-systemd
       image_version: 16.04
+      privileged: true
       ansible_groups:
         - molecule
 verifier:

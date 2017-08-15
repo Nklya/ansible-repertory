@@ -1,4 +1,3 @@
 ---
-- src: ANXS.postgresql
-- src: dj-wasabi.zabbix-agent
-- src: dj-wasabi.zabbix-server
+- williamyeh.prometheus
+- ansiblebit.grafana

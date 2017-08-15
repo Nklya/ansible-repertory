@@ -1,6 +1,14 @@
-- name: Install GnuPG v.2
+- name: Install base packages
   apt:
-    name: gnupg2
+    name: "{{ item }}"
     state: present
     update_cache: yes
     cache_valid_time: 86400
+  with_items:
+    - htop
+    - unzip
+    - wget
+    - apt-transport-https
+- debug:
+    var: prometheus_components
+    # verbosity: 2
